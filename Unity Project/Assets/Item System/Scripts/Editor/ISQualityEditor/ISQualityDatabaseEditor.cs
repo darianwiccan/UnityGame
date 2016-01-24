@@ -4,13 +4,19 @@ using System.Collections;
 
 namespace UnityGame.ItemSystem.Editor
 {
-    public class ISQualityDatabaseEditor : EditorWindow
+    public partial class ISQualityDatabaseEditor : EditorWindow
     {
-        ISQualityDatabase db;
+        ISQualityDatabase qualityDatabase;
 
-        const string DATABASE_FILE_NAME = @"QualityDatabase.asset";
-        const string DATABASE_FOLDER_NAME = @"Database";
-        const string DATABASE_FULL_PATH = @"Assets/" + DATABASE_FOLDER_NAME + "/" + DATABASE_FILE_NAME;
+        Texture2D selectedTexture;
+        int selectedIndex = -1;
+        Vector2 _scrollPos;
+
+        const int SPRITE_BUTTON_SIZE = 42;
+
+        const string DATABASE_NAME = @"QualityDatabase.asset";
+        const string DATABASE_PATH = @"Database";
+        const string DATABASE_FULL_PATH = @"Assets/" + DATABASE_PATH + "/" + DATABASE_NAME;
 
         [MenuItem("UnityGame/Database/Quality Editor %#w")]
 
@@ -18,25 +24,38 @@ namespace UnityGame.ItemSystem.Editor
         {
             ISQualityDatabaseEditor window = EditorWindow.GetWindow<ISQualityDatabaseEditor>();
             window.minSize = new Vector2(400, 300);
-            window.title = "Quality DB";
+            window.titleContent = new GUIContent("Quality DB");
             window.Show();
         }
 
         void OnEnable()
         {
-            db = AssetDatabase.LoadAssetAtPath(DATABASE_FULL_PATH, typeof(ISQualityDatabaseEditor)) as ISQualityDatabase;
+            qualityDatabase = ScriptableObject.CreateInstance<ISQualityDatabase>();
+            qualityDatabase = qualityDatabase.GetDatabase<ISQualityDatabase>(DATABASE_PATH, DATABASE_NAME);
+        }
 
-            if (db == null)
+        void OnGUI()
+        {
+            if (qualityDatabase == null)
             {
-                if (!AssetDatabase.IsValidFolder("Assets/" + DATABASE_FOLDER_NAME))
-                {
-                    AssetDatabase.CreateFolder("Assets", DATABASE_FOLDER_NAME);
-                }
+                Debug.LogWarning("qualityDatabase not loaded");
+                return;
+            }
 
-                db = ScriptableObject.CreateInstance<ISQualityDatabase>();
-                AssetDatabase.CreateAsset(db, DATABASE_FULL_PATH);
-                AssetDatabase.SaveAssets();
-                AssetDatabase.Refresh();
+            ListView();
+
+            GUILayout.BeginHorizontal("Box", GUILayout.ExpandWidth(true));
+            BottomBar();
+            GUILayout.EndHorizontal();
+        }
+
+        void BottomBar()
+        {
+            GUILayout.Label("Qualities: " + qualityDatabase.Count);
+
+            if (GUILayout.Button("Add"))
+            {
+                qualityDatabase.Add(new ISQuality());
             }
         }
     }

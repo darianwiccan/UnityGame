@@ -5,15 +5,19 @@ namespace UnityGame.ItemSystem
 {
     public class ISQuality : IISQuality
     {
-        [SerializeField]
-        string _name;
-        [SerializeField]
-        Sprite _icon;
+        [SerializeField] string _name;
+        [SerializeField] Sprite _icon;
 
-        ISQuality()
+        public ISQuality()
         {
-            _name = "Common";
+            _name = "";
             _icon = new Sprite();
+        }
+
+        public ISQuality(string name, Sprite icon)
+        {
+            _name = name;
+            _icon = icon;
         }
 
         public string Name

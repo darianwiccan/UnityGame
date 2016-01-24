@@ -5,42 +5,37 @@ namespace UnityGame.ItemSystem
 {
     public class ISObject : IISObject
     {
-        [SerializeField]
-        string _name;
-        [SerializeField]
-        Sprite _icon;
-        [SerializeField]
-        int _value;
-        [SerializeField]
-        int _burden;
-        [SerializeField]
-        ISQuality _quality;
+        [SerializeField] string _name;
+        [SerializeField] Sprite _icon;
+        [SerializeField] int _value;
+        [SerializeField] int _burden;
+        [SerializeField] ISQuality _quality;
 
-        public string ISName
+        public string Name
         {
             get { return _name; }
             set { _name = value; }
         }
 
-        public Sprite ISIcon
+        public Sprite Icon
         {
             get { return _icon; }
             set { _icon = value; }
         }
 
-        public int ISValue
+        public int Value
         {
             get { return _value; }
             set { _value = value; }
         }
 
-        public int ISBurden
+        public int Burden
         {
             get { return _burden; }
             set { _burden = value; }
         }
 
-        public ISQuality ISQuality
+        public ISQuality Quality
         {
             get { return _quality; }
             set { _quality = value; }

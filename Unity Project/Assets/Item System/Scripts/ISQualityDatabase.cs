@@ -1,12 +1,10 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq; // neded for ElementAt
 
 namespace UnityGame.ItemSystem
 {
-    public class ISQualityDatabase : ScriptableObject
-    {
- //     [SerializeField]
-        List<ISQuality> db = new List<ISQuality>();
-    }
+    public class ISQualityDatabase : ScriptableObjectDatabase<ISQuality> {}
 }
