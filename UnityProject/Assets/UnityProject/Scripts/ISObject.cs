@@ -3,6 +3,7 @@ using System.Collections;
 
 namespace UnityProject.ItemSystem
 {
+    [System.Serializable]
     public class ISObject : IISObject
     {
         [SerializeField]
@@ -16,31 +17,31 @@ namespace UnityProject.ItemSystem
         [SerializeField]
         ISQuality _quality;
 
-        public string ISName
+        public string ISOName
         {
             get { return _name; }
             set { _name = value; }
         }
 
-        public Sprite ISIcon
+        public Sprite ISOIcon
         {
             get { return _icon; }
             set { _icon = value; }
         }
 
-        public int ISValue
+        public int ISOValue
         {
             get { return _value; }
             set { _value = value; }
         }
 
-        public int ISBurden
+        public int ISOBurden
         {
             get { return _burden; }
             set { _burden = value; }
         }
 
-        public ISQuality ISQuality
+        public ISQuality ISOQuality
         {
             get { return _quality; }
             set { _quality = value; }

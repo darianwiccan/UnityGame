@@ -17,6 +17,12 @@ namespace UnityProject.ItemSystem
             _icon = new Sprite();
         }
 
+        public ISQuality(string name, Sprite icon)
+        {
+            _name = name;
+            _icon = icon;
+        }
+
         public string Name
         {
             get { return _name; }

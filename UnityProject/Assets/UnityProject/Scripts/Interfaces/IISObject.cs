@@ -5,10 +5,10 @@ namespace UnityProject.ItemSystem
 {
     public interface IISObject
     {
-        string ISName { get; set; }
-        Sprite ISIcon { get; set; }
-        int ISValue { get; set; }
-        int ISBurden { get; set; }
-        ISQuality ISQuality { get; set; }
+        string ISOName { get; set; }
+        Sprite ISOIcon { get; set; }
+        int ISOValue { get; set; }
+        int ISOBurden { get; set; }
+        ISQuality ISOQuality { get; set; }
     }
 }

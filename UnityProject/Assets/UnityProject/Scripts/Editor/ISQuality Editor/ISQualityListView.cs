@@ -17,6 +17,7 @@ namespace UnityProject.ItemSystem.Editor
         {
             for (int i = 0; i < qualityDatabase.Count; i++)
             {
+                GUILayout.BeginHorizontal("Box");
                 //Sprite
                 if (qualityDatabase.Get(i).Icon)
                     selectedTexture = qualityDatabase.Get(i).Icon.texture;
@@ -37,15 +38,27 @@ namespace UnityProject.ItemSystem.Editor
                     if (selectedIndex != -1)
                     {
                         qualityDatabase.Get(selectedIndex).Icon = (Sprite)EditorGUIUtility.GetObjectPickerObject();
+//                      selectedIndex = -1;
                     }
                     Repaint();
-//                  selectedIndex = -1;
                 }
 
+                GUILayout.BeginVertical();
                 //Name
                 GUILayout.Label(qualityDatabase.Get(i).Name);
                 //Delete Button
-                GUILayout.Button("X");
+                if (GUILayout.Button("X", GUILayout.Width(30), GUILayout.Height(30)))
+                {
+                    if (EditorUtility.DisplayDialog("Delete Quality",
+                                                    "Are you sure you want to delete " + qualityDatabase.Get(i).Name + "from the database?",
+                                                    "Delete",
+                                                    "Cancel"))
+                    {
+                        qualityDatabase.Remove(i);
+                    }
+                }
+                GUILayout.EndVertical();
+                GUILayout.EndHorizontal();
             }
         }
     }
