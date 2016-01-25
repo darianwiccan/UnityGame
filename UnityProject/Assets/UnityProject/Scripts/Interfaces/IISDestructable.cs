@@ -8,7 +8,7 @@ namespace UnityProject.ItemSystem
         int Durability { get; }
         int MaxDurability { get; }
         void TakeDamage(int amount);
-        void Break();
         void Repair();
+        void Break();
     }
 }

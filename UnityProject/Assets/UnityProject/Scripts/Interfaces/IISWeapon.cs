@@ -3,8 +3,9 @@ using System.Collections;
 
 namespace UnityProject.ItemSystem
 {
-    public interface IISGameObject
+    public interface IISWeapon
     {
-        GameObject Prefab { get; }
+        int MinDamage { get; set; }
+        int Attack();
     }
 }
