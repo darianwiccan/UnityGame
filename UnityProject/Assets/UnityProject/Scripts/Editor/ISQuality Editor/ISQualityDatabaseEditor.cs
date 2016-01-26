@@ -28,8 +28,8 @@ namespace UnityProject.ItemSystem.Editor
 
         void OnEnable()
         {
-            qualityDatabase = ScriptableObject.CreateInstance<ISQualityDatabase>();
-            qualityDatabase = qualityDatabase.GetDatabase<ISQualityDatabase>(DB_PATH, DB_NAME);
+            if (qualityDatabase == null)
+                qualityDatabase = ISQualityDatabase.GetDatabase<ISQualityDatabase>(DB_PATH, DB_NAME);
         }
 
         void OnGUI()

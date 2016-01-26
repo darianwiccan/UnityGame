@@ -45,7 +45,7 @@ namespace UnityProject.ItemSystem.Editor
 
                 GUILayout.BeginVertical();
                 //Name
-                GUILayout.Label(qualityDatabase.Get(i).Name);
+                GUILayout.TextField(qualityDatabase.Get(i).Name);
                 //Delete Button
                 if (GUILayout.Button("X", GUILayout.Width(30), GUILayout.Height(30)))
                 {

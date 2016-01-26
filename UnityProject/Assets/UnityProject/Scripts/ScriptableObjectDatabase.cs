@@ -50,7 +50,7 @@ namespace UnityProject
             EditorUtility.SetDirty(this);
         }
 
-        public U GetDatabase<U>(string dbPath, string dbName) where U : ScriptableObject
+        public static U GetDatabase<U>(string dbPath, string dbName) where U : ScriptableObject
         {
             string dbFullPath = @"Assets/" + dbPath + "/" + dbName;
 
@@ -61,6 +61,13 @@ namespace UnityProject
                 if (!AssetDatabase.IsValidFolder(@"Assets/" + dbPath))
                 {
                     AssetDatabase.CreateFolder(@"Assets", dbPath);
+                    db = ScriptableObject.CreateInstance<U>() as U;
+                    AssetDatabase.CreateAsset(db, dbFullPath);
+                    AssetDatabase.SaveAssets();
+                    AssetDatabase.Refresh();
+                }
+                else
+                {
                     db = ScriptableObject.CreateInstance<U>() as U;
                     AssetDatabase.CreateAsset(db, dbFullPath);
                     AssetDatabase.SaveAssets();
