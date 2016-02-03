@@ -6,16 +6,7 @@ namespace UnityProject.ItemSystem.Editor
 {
     public partial class ISObjectDatabaseEditor
     {
-        enum DisplayState
-        {
-            NONE,
-            DETAILS
-        };
-
         ISWeapon tempWeapon = new ISWeapon();
-        bool showNewWeaponDetails = false;
-
-        DisplayState state = DisplayState.NONE;
 
         void ObjectDetails()
         {
@@ -23,15 +14,8 @@ namespace UnityProject.ItemSystem.Editor
             GUILayout.Space(5);
             GUILayout.BeginVertical(GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(true));
 
-            switch (state)
-            {
-                case DisplayState.DETAILS:
-                    if (showNewWeaponDetails)
-                        DisplayNewWeapon();
-                    break;
-                default:
-                    break;
-            }
+            if (showDetails)
+                DisplayNewWeapon();
 
             GUILayout.EndVertical();
 
@@ -50,13 +34,12 @@ namespace UnityProject.ItemSystem.Editor
 
         void DisplayButtons()
         {
-            if (!showNewWeaponDetails)
+            if (!showDetails)
             {
                 if (GUILayout.Button("Create Weapon"))
                 {
                     tempWeapon = new ISWeapon();
-                    showNewWeaponDetails = true;
-                    state = DisplayState.DETAILS;
+                    showDetails = true;
                 }
             }
             else
@@ -72,10 +55,9 @@ namespace UnityProject.ItemSystem.Editor
                     {
                         weaponDatabase.Replace(_selectedIndex, tempWeapon);
                     }
-                    showNewWeaponDetails = false;
                     tempWeapon = null;
                     _selectedIndex = -1;
-                    state = DisplayState.NONE;
+                    showDetails = false;
                     GUI.FocusControl("SaveButton");
                 }
 
@@ -84,15 +66,14 @@ namespace UnityProject.ItemSystem.Editor
                     if (GUILayout.Button("Delete"))
                     {
                         if (EditorUtility.DisplayDialog("Delete Weapon",
-                                                        "Are you sure you want to delete " + weaponDatabase.Get(_selectedIndex).ISOName + " from the database?",
+                                                        "Are you sure you want to delete " + tempWeapon.ISOName + " from the database?",
                                                         "Delete",
                                                         "Cancel"))
                         {
                             weaponDatabase.Remove(_selectedIndex);
-                            showNewWeaponDetails = false;
                             tempWeapon = null;
                             _selectedIndex = -1;
-                            state = DisplayState.NONE;
+                            showDetails = false;
                             GUI.FocusControl("SaveButton");
                         }
                     }
@@ -100,10 +81,9 @@ namespace UnityProject.ItemSystem.Editor
 
                 if (GUILayout.Button("Cancel"))
                 {
-                    showNewWeaponDetails = false;
                     tempWeapon = null;
                     _selectedIndex = -1;
-                    state = DisplayState.NONE;
+                    showDetails = false;
                     GUI.FocusControl("SaveButton");
                 }
             }

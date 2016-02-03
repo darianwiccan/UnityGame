@@ -13,11 +13,11 @@ public class Demo1 : MonoBehaviour
         {
             if (GUILayout.Button("Spawn " + database.Get(i).ISOName))
             {
-                Spawn(i);
+ //               Spawn(i);
             }
         }
     }
-
+/*
     void Spawn(int index)
     {
         ISWeapon isw = database.Get(index);
@@ -34,5 +34,5 @@ public class Demo1 : MonoBehaviour
         myWeapon.Max_Durability = isw.MaxDurability;
         myWeapon.Equipment_Slot = isw.equipmentSlot;
 
-    }
+    }*/
 }

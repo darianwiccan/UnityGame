@@ -7,10 +7,16 @@ namespace UnityProject.ItemSystem.Editor
     public partial class ISObjectDatabaseEditor : EditorWindow
     {
         ISWeaponDatabase weaponDatabase;
+//      ISObjectCategory armorDatabase = new ISObjectCategory();
+
+        ISObjectDatabaseType<ISWeaponDatabase, ISWeapon> weaponDB = new ISObjectDatabaseType<ISWeaponDatabase, ISWeapon>("ISWeaponDB.asset");
+        ISObjectDatabaseType<ISArmorDatabase, ISArmor> armorDB = new ISObjectDatabaseType<ISArmorDatabase, ISArmor>("ISArmorDB.asset");
 
         const string DB_NAME = @"ISWeaponDB.asset";
         const string DB_PATH = @"Database";
         const string DB_FULL_PATH = @"Assets/" + DB_PATH + "/" + DB_NAME;
+
+        public bool showDetails = false;
 
         [MenuItem("UnityProject/Database/Object Editor %#i")]
         public static void Init()
@@ -23,10 +29,15 @@ namespace UnityProject.ItemSystem.Editor
 
         void OnEnable()
         {
-            if (weaponDatabase == null)
-                weaponDatabase = ISWeaponDatabase.GetDatabase<ISWeaponDatabase>(DB_PATH, DB_NAME);
+//          if (weaponDatabase == null)
+//              weaponDatabase = ISWeaponDatabase.GetDatabase<ISWeaponDatabase>(DB_PATH, DB_NAME);
 
-            tabState = TabState.WEAPON;
+//          armorDatabase.OnEnable();
+
+            weaponDB.OnEnable("Weapon");
+            armorDB.OnEnable("Armor");
+
+            tabState = TabState.ABOUT;
         }
 
         void OnGUI()
@@ -38,10 +49,13 @@ namespace UnityProject.ItemSystem.Editor
             switch (tabState)
             {
                 case TabState.WEAPON:
-                    ListView();
-                    ObjectDetails();
+                    weaponDB.OnGUI(buttonSize, _listViewWidth);
+//                  ListView();
+//                  ObjectDetails();
                     break;
                 case TabState.ARMOR:
+                    armorDB.OnGUI(buttonSize, _listViewWidth);
+//                  armorDatabase.OnGUI(buttonSize, _listViewWidth);
                     break;
                 case TabState.POTION:
                     break;

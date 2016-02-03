@@ -10,51 +10,50 @@ namespace UnityProject
 {
     public class ScriptableObjectDatabase<T> : ScriptableObject where T : class
     {
-        [SerializeField] protected List<T> database = new List<T>();
+        [SerializeField] protected List<T> items = new List<T>();
 
-        public List<T> Database
+        public List<T> Items
         {
-            get { return database; }
+            get { return items; }
         }
-
 #if UNITY_EDITOR
         public void Add(T item)
         {
-            database.Add(item);
+            items.Add(item);
             EditorUtility.SetDirty(this);
         }
 
         public void Insert(int index, T item)
         {
-            database.Insert(index, item);
+            items.Insert(index, item);
             EditorUtility.SetDirty(this);
         }
 
         public void Remove(T item)
         {
-            database.Remove(item);
+            items.Remove(item);
             EditorUtility.SetDirty(this);
         }
 
         public void Remove(int index)
         {
-            database.RemoveAt(index);
+            items.RemoveAt(index);
             EditorUtility.SetDirty(this);
         }
 #endif
         public int Count
         {
-            get { return database.Count; }
+            get { return items.Count; }
         }
 
         public T Get(int index)
         {
-            return database.ElementAt(index);
+            return items.ElementAt(index);
         }
 #if UNITY_EDITOR
         public void Replace(int index, T item)
         {
-            database[index] = item;
+            items[index] = item;
             EditorUtility.SetDirty(this);
         }
 

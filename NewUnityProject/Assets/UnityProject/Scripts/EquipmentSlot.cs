@@ -10,8 +10,9 @@ namespace UnityProject.ItemSystem
         Shoulders,
         Chest,
         Arms,
-        Right_Hand,
-        Left_Hand,
+        Hands,
+        Weapon,
+        Shield,
         Waist,
         Legs,
         Feet

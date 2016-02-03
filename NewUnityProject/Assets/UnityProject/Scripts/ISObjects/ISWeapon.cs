@@ -22,13 +22,14 @@ namespace UnityProject.ItemSystem
             _minDamage = 0;
             _durability = 1;
             _maxDurability = 1;
-            _prefab = new GameObject();
+            _prefab = null;
 
-            equipmentSlot = EquipmentSlot.Right_Hand;
+            equipmentSlot = EquipmentSlot.Weapon;
         }
 
         public ISWeapon(ISWeapon weapon)
         {
+            Clone(weapon);
         }
 
         public void Clone(ISWeapon weapon)
@@ -107,7 +108,6 @@ namespace UnityProject.ItemSystem
         public void DisplayEquipmentSlot()
         {
             equipmentSlot = (EquipmentSlot)EditorGUILayout.EnumPopup("Equipment Slot", equipmentSlot);
-            GUILayout.Label("Equipment Slot");
         }
 
         public void DisplayPrefab()

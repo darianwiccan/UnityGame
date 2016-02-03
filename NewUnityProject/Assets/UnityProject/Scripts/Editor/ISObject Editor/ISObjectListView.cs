@@ -13,22 +13,22 @@ namespace UnityProject.ItemSystem.Editor
 
         int _selectedIndex = -1;
 
+        Vector2 buttonSize = new Vector2(190, 25);
+
         void ListView()
         {
-            if (state != DisplayState.NONE)
-                return;
-
             _scrollPos = GUILayout.BeginScrollView(_scrollPos, "Box", GUILayout.ExpandHeight(true), GUILayout.Width(_listViewWidth));
 
             for (int i = 0; i < weaponDatabase.Count; i++)
             {
                 if (GUILayout.Button(weaponDatabase.Get(i).ISOName, "box", GUILayout.Width(_listViewButtonWidth), GUILayout.Height(_listViewButtonHeight)))
                 {
+                    if (showDetails)
+                        return;
                     _selectedIndex = i;
                     tempWeapon = new ISWeapon();
                     tempWeapon.Clone(weaponDatabase.Get(i));
-                    showNewWeaponDetails = true;
-                    state = DisplayState.DETAILS;
+                    showDetails = true;
                     GUI.FocusControl("SaveButton");
                 }
             }
