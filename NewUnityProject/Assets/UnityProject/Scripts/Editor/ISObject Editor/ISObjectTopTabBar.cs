@@ -12,7 +12,7 @@ namespace UnityProject.ItemSystem.Editor
             ARMOR,
             POTION,
             SPELL,
-            ABOUT
+            QUALITY
         }
 
         TabState tabState;
@@ -24,7 +24,7 @@ namespace UnityProject.ItemSystem.Editor
             ArmorTab();
             PotionTab();
             SpellTab();
-            AboutTab();
+            QualityTab();
             GUILayout.EndHorizontal();
         }
 
@@ -52,10 +52,10 @@ namespace UnityProject.ItemSystem.Editor
                 tabState = TabState.SPELL;
         }
 
-        void AboutTab()
+        void QualityTab()
         {
-            if (GUILayout.Button("About"))
-                tabState = TabState.ABOUT;
+            if (GUILayout.Button("Qualities"))
+                tabState = TabState.QUALITY;
         }
     }
 }

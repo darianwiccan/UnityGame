@@ -6,15 +6,15 @@ namespace UnityProject.ItemSystem.Editor
 {
     public partial class ISObjectDatabaseEditor : EditorWindow
     {
-        ISWeaponDatabase weaponDatabase;
-//      ISObjectCategory armorDatabase = new ISObjectCategory();
-
         ISObjectDatabaseType<ISWeaponDatabase, ISWeapon> weaponDB = new ISObjectDatabaseType<ISWeaponDatabase, ISWeapon>("ISWeaponDB.asset");
         ISObjectDatabaseType<ISArmorDatabase, ISArmor> armorDB = new ISObjectDatabaseType<ISArmorDatabase, ISArmor>("ISArmorDB.asset");
+//      ISObjectDatabaseType<ISQualityDatabase, ISQuality> qualityDB = new ISObjectDatabaseType<ISQualityDatabase, ISQuality>("ISQualityDB.asset");
+        ISObjectDatabaseType<ISPotionDatabase, ISPotion> potionDB = new ISObjectDatabaseType<ISPotionDatabase, ISPotion>("ISPotionDB.asset");
+        ISObjectDatabaseType<ISSpellDatabase, ISSpell> spellDB = new ISObjectDatabaseType<ISSpellDatabase, ISSpell>("ISSpellDB.asset");
+        ISQualityDatabase qualityDB = new ISQualityDatabase();
 
-        const string DB_NAME = @"ISWeaponDB.asset";
-        const string DB_PATH = @"Database";
-        const string DB_FULL_PATH = @"Assets/" + DB_PATH + "/" + DB_NAME;
+        Vector2 buttonSize = new Vector2(190, 25);
+        int _listViewWidth = 200;
 
         public bool showDetails = false;
 
@@ -29,15 +29,14 @@ namespace UnityProject.ItemSystem.Editor
 
         void OnEnable()
         {
-//          if (weaponDatabase == null)
-//              weaponDatabase = ISWeaponDatabase.GetDatabase<ISWeaponDatabase>(DB_PATH, DB_NAME);
-
-//          armorDatabase.OnEnable();
-
             weaponDB.OnEnable("Weapon");
             armorDB.OnEnable("Armor");
-
-            tabState = TabState.ABOUT;
+            potionDB.OnEnable("Potion");
+            spellDB.OnEnable("Spell");
+            qualityDB = ScriptableObjectDatabase<ISQuality>.GetDatabase<ISQualityDatabase>(@"Database", "ISQualityDB.asset");
+            if (qualityDB.Count < 1)
+                qualityDB.Add(null);
+            tabState = TabState.WEAPON;
         }
 
         void OnGUI()
@@ -50,21 +49,19 @@ namespace UnityProject.ItemSystem.Editor
             {
                 case TabState.WEAPON:
                     weaponDB.OnGUI(buttonSize, _listViewWidth);
-//                  ListView();
-//                  ObjectDetails();
                     break;
                 case TabState.ARMOR:
                     armorDB.OnGUI(buttonSize, _listViewWidth);
-//                  armorDatabase.OnGUI(buttonSize, _listViewWidth);
                     break;
                 case TabState.POTION:
+                    potionDB.OnGUI(buttonSize, _listViewWidth);
                     break;
                 case TabState.SPELL:
+                    spellDB.OnGUI(buttonSize, _listViewWidth);
                     break;
                 default:
                     break;
             }
-
 
             GUILayout.EndHorizontal();
             BottomBar();

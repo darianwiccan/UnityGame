@@ -4,7 +4,7 @@ using System.Collections;
 namespace UnityProject.ItemSystem
 {
     [System.Serializable]
-    public class ISQuality : IISQuality
+    public class ISQuality : IISQuality, IISDatabaseObject
     {
         [SerializeField]
         string _name;
@@ -33,6 +33,17 @@ namespace UnityProject.ItemSystem
         {
             get { return _icon; }
             set { _icon = value; }
+        }
+
+        public void Clone<T>(IISDatabaseObject item)
+        {
+            _name = item.Name;
+            _icon = item.Icon;
+        }
+
+        public void OnGUI()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

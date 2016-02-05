@@ -31,6 +31,12 @@ namespace UnityProject.ItemSystem
             _quality = item.ISOQuality;
         }
 
+        public void Clone(IISDatabaseObject item)
+        {
+            _name = item.Name;
+            _icon = item.Icon;
+        }
+
         public string ISOName
         {
             get { return _name; }

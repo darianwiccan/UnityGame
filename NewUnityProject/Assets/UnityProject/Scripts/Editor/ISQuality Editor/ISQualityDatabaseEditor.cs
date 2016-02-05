@@ -6,6 +6,7 @@ namespace UnityProject.ItemSystem.Editor
 {
     public partial class ISQualityDatabaseEditor : EditorWindow
     {
+//      ISObjectDatabaseType<> qualityDB = new ISObjectDatabaseType<> ("ISQualityDB.asset");
         ISQualityDatabase qualityDatabase;
         Texture2D selectedTexture;
         int selectedIndex = -1;
